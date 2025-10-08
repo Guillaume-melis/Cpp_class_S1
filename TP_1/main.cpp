@@ -1,7 +1,7 @@
 #include <iostream>
-#include "Vect.hpp"
+#include "Rat.hpp"
 
-/*int main()
+int main()
 {
     Rat a(1, 2), b(3, 4), c(8), d(-2, -4);
 
@@ -22,9 +22,9 @@
     std::cout << "a >= b ? " << (a >= b) << '\n';
 
     return 0;
-}*/
+}
 
-int main()
+/*int main()
 {
     try
     {
@@ -73,4 +73,4 @@ int main()
     }
 
     return 0;
-}
+}*/

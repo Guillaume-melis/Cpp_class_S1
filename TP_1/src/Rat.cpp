@@ -16,48 +16,35 @@ Rat::Rat(int num, int den) : num_(num), den_(den)
     }
 
     reduce();
-    
-};
 
+};
 
 void Rat::reduce()
 {
-    int g = std::gcd(num_,den_);
-    num_ /= g;
-    den_ /= g;
+        int g = std::gcd(num_,den_);
+        num_ /= g;
+        den_ /= g;
 }
 
 //gestion opéateurs internes
 Rat& Rat::operator+=(const Rat r)
 {
-    num_ = num_ * r.den_ + r.num_ * den_;
-    den_ = den_ * r.den_;
-    reduce();
-    return *this;
+    return *this = Rat(num_ * r.den_ + r.num_ * den_,den_ * r.den_);
 }
 
 Rat& Rat::operator-=(const Rat r)
 {
-    num_ = num_ * r.den_ - r.num_ * den_;
-    den_ = den_ * r.den_;
-    reduce();
-    return *this;
+    return *this = Rat(num_ * r.den_ - r.num_ * den_,den_ * r.den_);
 }
 
 Rat& Rat::operator*=(const Rat r)
 {
-    num_ = num_ * r.num_;
-    den_ = den_ * r.den_;
-    reduce();
-    return *this;
+    return *this = Rat(num_*r.num_,den_ * r.den_);
 }
 
 Rat& Rat::operator/=(const Rat r)
 {
-    num_ = num_ * r.den_;
-    den_ = den_ * r.num_;
-    reduce(); 
-    return *this;
+    return *this = Rat(num_ * r.den_,den_ * r.num_);
 }
 
 //gestion opérateurs externes
@@ -87,37 +74,27 @@ Rat operator/(Rat r1, const Rat& r2)
 
 bool operator==(const Rat& r1, const Rat& r2)
 {
-    if (r1.num_ == r2.num_ && r1.den_ == r2.den_)
-        return true ;
-    return false;
+    return (r1.num_*r2.den_ == r1.den_*r2.num_);
 }
 
 bool operator!=(const Rat& r1, const Rat& r2)
 {
-    if(r1 == r2)
-        return false;
-    return true;
+    return !(r1 == r2);
 }
 
 bool operator<(const Rat& r1, const Rat& r2)
 {
-    if(r1 != r2 && r1.den_ > r2.den_)
-        return true;
-    return false;
+    return (r1 != r2 && r1.den_ > r2.den_);
 }
 
 bool operator<=(const Rat& r1, const Rat& r2)
 {
-    if(r1 < r2 || r1 == r2)
-        return true;
-    return false;
+    return (r1 < r2 || r1 == r2);
 }
 
 bool operator>(const Rat& r1, const Rat& r2)
 {
-    if(r1!=r2 && r1.get_den() < r2.get_den())
-        return true;
-    return false;
+    return !(r1 <= r2);
 }
 
 bool operator>=(const Rat& r1, const Rat& r2)
