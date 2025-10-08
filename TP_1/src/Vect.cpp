@@ -1,6 +1,7 @@
 #include <iostream>
 #include <ostream>
 #include <cmath>
+#include <algorithm>
 #include "Vect.hpp"
 
 Vect::Vect(int size) : size_(size)
@@ -45,7 +46,15 @@ double& Vect::operator[](int i)
     return data_[i];
 }
 
-Vect& Vect::operator=(const Vect& v)
+const double& Vect::operator[](int i) const
+{
+    if(i<0 || i>= size_)
+        throw std::invalid_argument("Try accessing a member out of range");
+
+    return data_[i];
+}
+
+Vect& Vect::operator=(const Vect& v) //Actually it's not the best way to do as we have to free the memory allocation. It's better to use the swap
 {
     if(this != &v)
     {
@@ -63,6 +72,7 @@ Vect& Vect::operator=(const Vect& v)
     
     return *this;
 }
+
 
 //Surcharge des opérateurs externes
 Vect operator+(Vect& v1,Vect& v2)
@@ -152,7 +162,7 @@ Vect operator/(Vect& v, const double d)
     return result;
 }
 
-std::ostream& operator<<(std::ostream& os, Vect& v)
+std::ostream& operator<<(std::ostream& os, const Vect& v)
 {
     os << "(" ;
     for(int i=0; i<v.get_size(); i++)

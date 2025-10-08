@@ -5,13 +5,14 @@
 #include <iostream>
 #include <stdexcept>
 #include <cmath>
+#include <algorithm>
 
 class Vect
 {
     int size_;
     double* data_;
 
-    friend std::ostream& operator<<(std::ostream& os, Vect&);
+    friend std::ostream& operator<<(std::ostream& os, const Vect&);
 
     public: 
     Vect(int size);
@@ -23,6 +24,7 @@ class Vect
 
     //Surcharge des opérateurs internes
     double & operator[](int i);
+    const double& operator[](int i) const;
     Vect& operator=(const Vect& v);
 
 };
