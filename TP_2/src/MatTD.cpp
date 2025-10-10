@@ -19,7 +19,9 @@ MatTD::MatTD(const MatTD& m) : BMat(m.get_nl(), m.get_nc())
 
 MatTD::~MatTD()
 {
-    delete[] diag_, diagl_, diagu_;
+    delete[] diag_; 
+    delete[] diagl_; 
+    delete[] diagu_;
 }
 
 
@@ -27,8 +29,12 @@ MatTD& MatTD::operator=(const MatTD& m)
 {
     if(get_nc() != m.get_nc())
     {
-        delete diag_, diagl_, diagu_;
-        diag_, diagl_, diagu_ = new double[m.get_nl()], new double[m.get_nl()-1], new double[m.get_nl()-1];
+        delete[] diag_;
+        delete[] diagl_; 
+        delete[] diagu_;
+        diag_ = new double[m.get_nl()] ;
+        diagl_ = new double[m.get_nl()-1];
+        diagu_ = new double[m.get_nl()-1];
     }
     std::copy(m.diag_, m.diag_ + get_nl() * get_nc(), diag_);
     std::copy(m.diagl_, m.diagl_ + get_nl() * get_nc(), diagl_);
@@ -36,9 +42,49 @@ MatTD& MatTD::operator=(const MatTD& m)
     return *this;
 }
 
-double& MatTD::operator()(int l, int c) const
+double MatTD::operator()(int l, int c) const
 {
-    double& result = *0.0;
-    if(l == get_nl() || c == get_nc())
-        return 0;
+    if(l==c)
+        return diag_[l];
+    
+    if(l == c-1)
+        return diagu_[l];
+    
+    if(l== c+1)
+        return diagl_[l];
+    
+    else 
+        return 0.0;
 }
+
+double& MatTD::operator()(int l, int c) 
+{
+    if(l==c)
+        return diag_[l];
+    
+    if(l == c-1)
+        return diagu_[l];
+    
+    if(l== c+1)
+        return diagl_[l];
+    
+    else 
+        throw std::out_of_range("Element en dehors de la bande tri-diagonale");
+}
+
+void MatTD::print(std::ostream& os) const {
+    for (int i = 0; i < get_nl(); ++i) {
+        for (int j = 0; j < get_nc(); ++j) {
+            if (i == j)
+                os << diag_[i] << " ";
+            else if (i == j - 1)
+                os << diagu_[i] << " ";
+            else if (i == j + 1)
+                os << diagl_[i] << " ";
+            else
+                os << 0.0 << " ";
+        }
+        os << std::endl;
+    }
+}
+

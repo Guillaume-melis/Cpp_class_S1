@@ -30,12 +30,21 @@ Mat& Mat::operator=(const Mat& m)
     return *this;
 }
 
-double& Mat::operator()(int l, int c) const
+double& Mat::operator()(int l, int c) 
 {
     return data_[l * get_nc() + c];
 }
 
-double Mat::operator()(int l, int c)
+double Mat::operator()(int l, int c) const
 {
     return data_[l*get_nc() +c];
+}
+
+void Mat::print(std::ostream& os) const
+{
+    for (int i = 0; i < BMat::get_nl(); ++i) {
+        for (int j = 0; j < BMat::get_nc(); ++j)
+            os << (*this)(i,j) << " ";
+        os << std::endl;
+    }
 }

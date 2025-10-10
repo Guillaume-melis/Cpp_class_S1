@@ -17,8 +17,13 @@ class MatTD : public BMat
     MatTD& operator=(const MatTD& m);
 
     //définition des méthodes virtuelles
-    double& operator()(int l, int c) const;
-    double operator()(int l, int c);
+    double& operator()(int l, int c) override;
+    double operator()(int l, int c)const override;
+
+    void print(std::ostream& os) const override;
+
+    //Mat MatTD::transp() const override;
+
 };
 
 

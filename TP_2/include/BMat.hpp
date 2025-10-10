@@ -3,12 +3,13 @@
 
 #include <iostream>
 #include <ostream>
-#include "Mat.hpp"
 
 class  BMat
 {
     int nl_;
     int nc_;
+
+    friend std::ostream& operator<<(std::ostream& os, const BMat&);
 
     public :
     BMat(int nl,int nc);
@@ -19,11 +20,16 @@ class  BMat
     const bool same_size(const BMat& m) const;
 
     //définir les opérateurs virtuels
-    virtual double& operator()(int l, int c) const = 0;
-    virtual double operator()(int l, int c) = 0;
+    virtual double& operator()(int l, int c) = 0;
+    virtual double operator()(int l, int c) const = 0;
+
 
     //operateur de transposé
-    const Mat transp();
+    //virtual BMat* transp() const = 0;
+
+    //operateur de sortie 
+    virtual void print(std::ostream& os) const = 0;
+    friend std::ostream& operator<<(std::ostream& os, const BMat&);
 };
 
 

@@ -4,7 +4,7 @@
 #include <algorithm>
 #include "Vect.hpp"
 
-Vect::Vect(int size) : size_(size)
+Vect::Vect(int size) : Mat(size, 1), size_(size)
 {
     if(size==0)
         throw std::invalid_argument("Size cannot be 0");
@@ -13,7 +13,7 @@ Vect::Vect(int size) : size_(size)
        
 }
 
-Vect::Vect(const Vect& v) : size_(v.size_)
+Vect::Vect(const Vect& v) : Mat(v.size_, 1), size_(v.size_) 
 {
     data_ = new double [size_];
     for(int i=0; i<size_;i++)

@@ -19,9 +19,10 @@ class Mat : public BMat
     Mat& operator=(const Mat& m);
 
     //définition des methodes virtuelles 
-    double& operator()(int l, int c) const;
-    double operator()(int l, int c) ;
+    double& operator()(int l, int c) override;
+    double operator()(int l, int c) const override;
 
+    void print(std::ostream& os) const override;
 };
 
 #endif

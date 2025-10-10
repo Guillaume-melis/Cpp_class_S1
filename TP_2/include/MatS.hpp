@@ -9,7 +9,7 @@ class MatS : public Mat
     MatS(int n);
     const int get_size() const;
     const double trace() const;
-    const double det() const;
+    double det() const;
 };
 
 #endif
