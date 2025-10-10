@@ -46,7 +46,7 @@ double& Vect::operator[](int i)
     return data_[i];
 }
 
-const double& Vect::operator[](int i) const
+double Vect::operator[](int i) const
 {
     if(i<0 || i>= size_)
         throw std::invalid_argument("Try accessing a member out of range");

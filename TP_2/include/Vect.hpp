@@ -6,8 +6,9 @@
 #include <stdexcept>
 #include <cmath>
 #include <algorithm>
+#include "Mat.hpp"
 
-class Vect 
+class Vect : public Mat
 {
     int size_;
     double* data_;
@@ -20,11 +21,11 @@ class Vect
     ~Vect();
  
     int get_size() const {return size_;}
-    double norm(double p = 2.0) const;
+    double norm(double p = 2.0) const; 
 
     //Surcharge des opérateurs internes
-    double & operator[](int i);
-    const double& operator[](int i) const;
+    double operator[](int i) const;
+    double& operator[](int i);
     Vect& operator=(const Vect& v);
 
 };

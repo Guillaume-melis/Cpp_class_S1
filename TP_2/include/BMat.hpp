@@ -5,13 +5,13 @@
 #include <ostream>
 #include "Mat.hpp"
 
-class BMat
+class  BMat
 {
-    const int nl_;
-    const int nc_;
+    int nl_;
+    int nc_;
 
     public :
-    BMat(const int nl, const int nc);
+    BMat(int nl,int nc);
     const int get_nl() const {return nl_;} 
     const int get_nc() const {return nc_;}
 

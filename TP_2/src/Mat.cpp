@@ -1,0 +1,41 @@
+#include "Mat.hpp"
+#include "BMat.hpp"
+#include "Vect.hpp"
+#include <algorithm>
+
+Mat::Mat(int nl, int nc) : BMat(nl,nc)
+{
+    data_ = new double[nl*nc];
+}
+
+Mat::Mat(const Mat& m)  : BMat(m.get_nl(), m.get_nc())
+{
+    data_ = new double[m.get_nl()* m.get_nc()];
+    data_ = m.data_;
+}
+
+Mat::~Mat()
+{
+    delete[] data_;
+}
+
+Mat& Mat::operator=(const Mat& m)
+{
+    if(get_nl() * get_nc() != m.get_nl() * m.get_nc())
+    {
+        delete[] data_;
+        data_ = new double[m.get_nl() * m.get_nc()];
+    }
+    std::copy(m.data_, m.data_ + get_nl() * get_nc(), data_);
+    return *this;
+}
+
+double& Mat::operator()(int l, int c) const
+{
+    return data_[l * get_nc() + c];
+}
+
+double Mat::operator()(int l, int c)
+{
+    return data_[l*get_nc() +c];
+}

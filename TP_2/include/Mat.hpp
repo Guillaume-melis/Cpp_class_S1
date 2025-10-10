@@ -4,6 +4,7 @@
 #include "BMat.hpp"
 #include <iostream>
 #include <ostream>
+#include <algorithm>
 
 class Mat : public BMat
 {
@@ -15,8 +16,11 @@ class Mat : public BMat
     Mat(const Mat& m); //c-c
 
     //surcharge des opérateurs
+    Mat& operator=(const Mat& m);
 
-
+    //définition des methodes virtuelles 
+    double& operator()(int l, int c) const;
+    double operator()(int l, int c) ;
 
 };
 
