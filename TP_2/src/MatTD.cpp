@@ -88,3 +88,15 @@ void MatTD::print(std::ostream& os) const {
     }
 }
 
+MatTD MatTD::transp()
+{
+    MatTD result(get_nl());
+    for(int i=0;i<get_nl();i++)
+    {
+        for(int j=0;j<get_nc();j++)
+        {
+            result(i,j) = (*this)(j,i);
+        }
+    }
+    return result;
+}

@@ -48,3 +48,16 @@ void Mat::print(std::ostream& os) const
         os << std::endl;
     }
 }
+
+Mat Mat::transp()
+{
+    Mat result(get_nc(),get_nl());
+    for(int i=0;i<get_nl();i++)
+    {
+        for(int j=0;j<get_nc();j++)
+        {
+            result(i,j) = (*this)(j,i);
+        }
+    }
+    return result;
+}

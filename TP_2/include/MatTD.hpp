@@ -22,8 +22,8 @@ class MatTD : public BMat
 
     void print(std::ostream& os) const override;
 
-    //Mat MatTD::transp() const override;
-
+    MatTD transp() ;
+    
 };
 
 

@@ -23,6 +23,8 @@ class Mat : public BMat
     double operator()(int l, int c) const override;
 
     void print(std::ostream& os) const override;
+
+    Mat transp() ;
 };
 
 #endif
