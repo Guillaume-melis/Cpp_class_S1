@@ -6,7 +6,9 @@
 #include "MatTD.hpp"
 #include "Vect.hpp"
 
+
 using namespace std;
+using namespace std::chrono;
 
 int main() {
     try {
@@ -26,15 +28,42 @@ int main() {
         cout << "A = \n" << A << endl;
         cout << "B = \n" << B << endl;
 
+
+        Mat a(2, 2);
+        a(0,0) = 1.0; a(0,1) = 2.0;
+        a(1,0) = 3.0; a(1,1) = 4.0;
+
+        Mat b = a;
+        b(0,0) = 10.0;
+
+        std::cout << a(0,0) << std::endl; // doit afficher 1.0, pas 10.0
+
+
         cout << "\n=== Test MatS (carrée) ===" << endl;
-        MatS S(3);
-        for(int i=0;i<3;i++)
-            for(int j=0;j<3;j++)
-                S(i,j) = (i<=j) ? i+j+1 : S(j,i); // remplissage symétrique
+        MatS S(10);
+        for (int i = 0; i < 10; ++i) 
+        {
+            for (int j = 0; j < 10; ++j) 
+            {
+                if (i == j) 
+                    S(i, j) = i + 1;       // diagonale : 1, 2, ..., 10
+                else
+                    S(i, j) = (i + j) % 3 + 1; // valeurs arbitraires hors diagonale
+            }
+        }
+        
+        /*for(int i=0;i<10;i++)
+            for(int j=0;j<10;j++)
+                S(i,j) = (i<=j) ? i+j+1 : S(j,i);*/ // remplissage symétrique
 
         cout << "S = \n" << S << endl;
         cout << "Trace(S) = " << S.trace() << endl;
+        auto start = high_resolution_clock::now();
         cout << "Det(S) = " << S.det() << endl;
+        auto end = high_resolution_clock::now();
+
+        auto duration = duration_cast<milliseconds>(end - start);
+        cout << "Temps d'exécution : " << duration.count() << " ms" << endl;
 
         cout << "\n=== Test MatTD (tridiagonale) ===" << endl;
         MatTD T(4);

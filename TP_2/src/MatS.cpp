@@ -1,6 +1,8 @@
 #include "MatS.hpp"
 #include <algorithm>
 
+#include <iostream>
+
 
 MatS::MatS(int n) : Mat(n, n) { }
 

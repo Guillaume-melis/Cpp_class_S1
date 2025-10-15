@@ -3,15 +3,17 @@
 #include "Vect.hpp"
 #include <algorithm>
 
-Mat::Mat(int nl, int nc) : BMat(nl,nc)
+Mat::Mat(int nl, int nc) : BMat(nl, nc)
 {
-    data_ = new double[nl*nc];
+    data_ = new double[nl * nc]{0.0}; 
 }
 
-Mat::Mat(const Mat& m)  : BMat(m.get_nl(), m.get_nc())
+Mat::Mat(const Mat& m) : BMat(m)
 {
-    data_ = new double[m.get_nl()* m.get_nc()];
-    data_ = m.data_;
+    int size = m.get_nl() * m.get_nc();
+    data_ = new double[size];
+    for(int i = 0; i < size; ++i)
+        data_[i] = m.data_[i]; 
 }
 
 Mat::~Mat()
