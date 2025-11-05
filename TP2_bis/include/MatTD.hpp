@@ -14,6 +14,7 @@ class MatTD : public BMat
 
     int get_size() {return diag_.size();}
     double& operator()(int l, int c) override;
+    const double& operator()(int l, int c) const override;
 
     void print(std::ostream& os) const override;
 

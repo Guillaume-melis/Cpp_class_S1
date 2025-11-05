@@ -10,28 +10,6 @@ Mat::Mat(int nl, int nc) : BMat(nl, nc)
     data.resize(nl*nc);
 }
 
-const Mat& Mat::operator+(const Mat& m)
-{
-    if(!same_size(m))
-        throw std::invalid_argument("The matrices should have the same size");
-    
-    Mat result(get_nl(), get_nc());
-    for(size_t i=0; i<data.size(); i++)
-        result.data[i] = data[i] + m.data[i];
-    return result;
-}
-
-const Mat& Mat::operator-(const Mat& m)
-{
-    if(!same_size(m))
-        throw std::invalid_argument("The matrices should have the same size");
-    
-    Mat result(get_nl(), get_nc());
-    for(size_t i=0; i<data.size(); i++)
-        result.data[i] = data[i] - m.data[i];
-    return result;
-}
-
 Mat Mat::transp()
 {
     Mat result(get_nl(), get_nc());
@@ -42,6 +20,11 @@ Mat Mat::transp()
 }
 
 double& Mat::operator()(int l, int c)
+{
+    return data[l * get_nc() + c];
+}
+
+const double& Mat::operator()(int l, int c) const
 {
     return data[l * get_nc() + c];
 }

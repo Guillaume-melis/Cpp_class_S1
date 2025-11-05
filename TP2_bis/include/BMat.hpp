@@ -18,6 +18,7 @@ class BMat
     const int get_nc() const {return nc_;}
 
     virtual double& operator()(int l, int c) = 0;
+    virtual const double& operator()(int l, int c) const = 0;
 
     const bool same_size(const BMat& m) const;
 
