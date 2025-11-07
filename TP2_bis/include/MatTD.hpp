@@ -21,4 +21,4 @@ class MatTD : public BMat
     MatTD transp();
 }; 
 
-#endif;
+#endif

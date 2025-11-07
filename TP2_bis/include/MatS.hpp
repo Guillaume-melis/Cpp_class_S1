@@ -5,9 +5,11 @@
 
 class MatS : public Mat
 {
+    int n_;
+
     public : 
     MatS(int n); 
-    const int get_size() const;
+    const int get_size() const {return n_;};
     const double trace() const;
     double det() const;
 };
